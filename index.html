@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Increase Productivity with us!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">routineFLow</h1>
+                <div class="clock-header">
+                    <div class="flip-clock-header">
+                        <div class="flip-clock-field-header" id="clockHoursHeader">00</div>
+                        <div class="flip-clock-divider-colon-header"></div>
+                        <div class="flip-clock-field-header" id="clockMinutesHeader">00</div>
+                    </div>
+                </div>
+                <div class="header-controls">
+                    <button class="calendar-btn" id="calendarBtn" title="View calendar">📅 Calendar</button>
+                    <button class="logs-btn" id="logsBtn" title="View activity logs">📋 Logs</button>
+                    <button class="logout-btn" id="logoutBtn" title="Log out">↪ Logout</button>
+                    <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                    <select class="theme-selector" id="themeSelector" title="Select theme">
+                        <option value="monokaiPro">Monokai Pro</option>
+                        <option value="dracula">Dracula</option>
+                        <option value="gruvbox">Gruvbox</option>
+                        <option value="nord">Nord</option>
+                        <option value="tokyoNight">Tokyo Night</option>
+                        <option value="catppuccin">Catppuccin</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-value" id="completedCount">0</div>
+                    <div class="stat-label">Completed Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalCount">0</div>
+                    <div class="stat-label">Total Routines</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="percentageCount">0%</div>
+                    <div class="stat-label">Completion Rate</div>
+                </div>
+            </section>
+
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="routineInput" 
+                        class="routine-input" 
+                        placeholder="Add a new routine..."
+                        autocomplete="off"
+                    >
+                    <button class="add-btn" id="addBtn">Add Routine</button>
+                    <button class="schedule-btn" id="scheduleBtn" title="Schedule routine to specific days">📅 Schedule</button>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="pending">Pending</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                </div>
+            </section>
+
+            <!-- Routines List -->
+            <section class="routines-section">
+                <div class="routines-list" id="routinesList">
+                    <div class="empty-state">
+                        <div class="empty-icon">✨</div>
+                        <p>No routines yet. Start building your routine!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Clear Completed Button -->
+            <section class="action-section">
+                <button class="clear-btn" id="clearCompletedBtn">Clear Completed</button>
+                <button class="reset-btn" id="resetBtn">Reset Today</button>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>routine checker · made with ✨</p>
+        </footer>
+
+        <!-- Schedule Modal -->
+        <div class="schedule-modal" id="scheduleModal">
+            <div class="schedule-modal-content">
+                <div class="schedule-modal-header">
+                    <h2>Schedule Routine</h2>
+                    <button class="close-schedule-modal" id="closeScheduleModal">&times;</button>
+                </div>
+                <div class="schedule-form">
+                    <div class="form-group">
+                        <label for="scheduledRoutineText">Routine Name:</label>
+                        <input type="text" id="scheduledRoutineText" class="form-input" placeholder="Enter routine name">
+                    </div>
+                    <div class="form-group">
+                        <label for="periodSelect">Schedule Period:</label>
+                        <select id="periodSelect" class="form-select">
+                            <option value="weekly">Weekly (7 Days)</option>
+                            <option value="monthly">Monthly (30 Days)</option>
+                            <option value="yearly">Yearly (365 Days)</option>
+                        </select>
+                    </div>
+                    <div class="calendar-container" id="calendarContainer"></div>
+                    <div class="schedule-modal-actions">
+                        <button class="cancel-schedule-btn" id="cancelScheduleBtn">Cancel</button>
+                        <button class="save-schedule-btn" id="saveScheduleBtn">Save Schedule</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logs Modal -->
+        <div class="logs-modal" id="logsModal">
+            <div class="logs-modal-content">
+                <div class="logs-modal-header">
+                    <h2>Activity Logs</h2>
+                    <button class="close-logs-modal" id="closeLogsModal">&times;</button>
+                </div>
+                <div class="logs-list" id="logsList">
+                    <div class="empty-state">
+                        <div class="empty-icon">📋</div>
+                        <p>No logs yet. Start using the app!</p>
+                    </div>
+                </div>
+                <div class="logs-modal-footer">
+                    <button class="clear-logs-btn" id="clearLogsBtn">Clear All Logs</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar Modal -->
+        <div class="calendar-modal" id="calendarModal">
+            <div class="calendar-modal-content">
+                <div class="calendar-modal-header">
+                    <h2>Calendar</h2>
+                    <button class="close-calendar-modal" id="closeCalendarModal">&times;</button>
+                </div>
+                <div class="flip-calendar">
+                    <div class="calendar-header">
+                        <button class="calendar-nav-btn" id="prevMonth">&lt;</button>
+                        <div class="calendar-month-year" id="calendarMonthYear">January 2024</div>
+                        <button class="calendar-nav-btn" id="nextMonth">&gt;</button>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <div class="weekday">Sun</div>
+                        <div class="weekday">Mon</div>
+                        <div class="weekday">Tue</div>
+                        <div class="weekday">Wed</div>
+                        <div class="weekday">Thu</div>
+                        <div class="weekday">Fri</div>
+                        <div class="weekday">Sat</div>
+                    </div>
+                    <div class="calendar-days" id="calendarDays"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
